@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 /**
  * Created by Tomas Dahlander <br>
  * Date: 2021-05-18 <br>
@@ -20,7 +18,13 @@ public class Person {
     private String id;
     private String firstName;
     private String lastName;
-    private LocalDate birthdate;
+    private String birthdate;
     private String phone;
 
+    public Person(String firstName, String lastName, String birthdate, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthdate = birthdate;
+        this.phone = phone;
+    }
 }
