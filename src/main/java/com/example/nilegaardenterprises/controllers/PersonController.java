@@ -20,6 +20,12 @@ public class PersonController {
 
     private final PersonService personService;
 
+    @GetMapping("/")
+    public String welcomeMessage(@RequestParam(required = false) String name ){
+        if(name == null) name = "Orvar Karlsson";
+        return "Hi and welcome to this controller " + name;
+    }
+
     @GetMapping("/all")
     public List<Person> getAllPersons() {
         return personService.getAllPersons();
@@ -35,12 +41,12 @@ public class PersonController {
         return personService.saveNewPersons(persons);
     }
 
-    @GetMapping("/findbyphone/{phone}")
-    public Person findPersonbyPhone(@PathVariable String phone){
+    @GetMapping("/findByPhone/{phone}")
+    public Person findPersonByPhone(@PathVariable String phone){
         return personService.findPersonByPhone(phone);
     }
 
-    @GetMapping("/findByFirstNameAndLastName/{firstName}/{lastNAme}")
+    @GetMapping("/findByFirstNameAndLastName/{firstName}/{lastName}")
     public Person findPersonByNames(@PathVariable String firstName, @PathVariable String lastName) {
         return personService.findPersonByFirstNameAndLastName(firstName, lastName);
     }
