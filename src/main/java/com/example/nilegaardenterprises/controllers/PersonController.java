@@ -61,9 +61,23 @@ public class PersonController {
         return personService.findAllPersonsByLastName(lastName);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/deleteAllPersons")
     public String deleteAll() {
         return personService.deleteAllPersons();
     }
 
+    @GetMapping("deleteOnePerson/{firstName}/{lastName}")
+    public String deleteOnePerson(@PathVariable String firstName, @PathVariable String lastName) {
+        return personService.deleteOnePerson(firstName, lastName);
+    }
+
+    @GetMapping("/findByBirthdate/above/{birthYear}")
+    public List<Person> findPersonByBirthdateAbove(@PathVariable int birthYear) {
+        return personService.findByBirthdateAboveYear(birthYear);
+    }
+
+    @GetMapping("/findByBirthdate/below/{birthYear}")
+    public List<Person> findPersonByBirthdateBelow(@PathVariable int birthYear) {
+        return personService.findByBirthdateAboveYear(birthYear);
+    }
 }
