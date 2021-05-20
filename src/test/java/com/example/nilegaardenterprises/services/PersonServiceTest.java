@@ -148,4 +148,19 @@ class PersonServiceTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    void deleteAllPersonsTest() {
+        when(mockRepository.findAll()).thenReturn(list);
+
+        String expected = "All persons below removed from database:\n";
+        for (Person person : list) {
+            expected += person.getFirstName() + " " + person.getLastName() + " deleted.\n";
+        }
+
+        String actual = personService.deleteAllPersons();
+
+        assertEquals(expected, actual);
+
+    }
 }

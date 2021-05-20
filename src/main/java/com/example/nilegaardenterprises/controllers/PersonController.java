@@ -61,4 +61,9 @@ public class PersonController {
         return personService.findAllPersonsByLastName(lastName);
     }
 
+    @DeleteMapping("/delete")
+    public String deleteAll() {
+        return personService.deleteAllPersons();
+    }
+
 }

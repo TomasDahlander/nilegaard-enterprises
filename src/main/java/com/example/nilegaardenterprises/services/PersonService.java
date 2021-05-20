@@ -63,4 +63,17 @@ public class PersonService {
         return personRepository.findAllByLastName(lastName);
     }
 
+    public String deleteAllPersons() {
+        List<Person> list = personRepository.findAll();
+        String message = "All persons below removed from database:\n";
+        if (list.size() == 0) {
+            message = "No persons found in database";
+        } else  {
+            for (Person person : list) {
+                message += person.getFirstName() + " " + person.getLastName() + " deleted.\n";
+            }
+            personRepository.deleteAll();
+        }
+        return message;
+    }
 }
