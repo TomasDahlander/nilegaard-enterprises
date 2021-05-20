@@ -167,11 +167,14 @@ class PersonServiceTest {
     @Test
     void deleteOnePersonTest() {
         when(mockRepository.findAll()).thenReturn(list);
-        String expected = "Person was deleted";
+        String expectedSuccess = "Person was deleted";
+        String expectedDecline = "Person does not exist";
 
         String actual = personService.deleteOnePerson("Orvar", "Karlsson");
+        String shouldBeDecline = personService.deleteOnePerson("asdf", "asdf");
 
-        assertEquals(expected, actual);
+        assertEquals(expectedDecline, shouldBeDecline);
+        assertEquals(expectedSuccess, actual);
     }
 
     @Test
@@ -181,7 +184,9 @@ class PersonServiceTest {
         Person expected = list.get(0);
 
         Person actual = personService.findOnePerson("Orvar", "Karlsson");
+        Person shouldBeNull = personService.findOnePerson("asdf", "asdfg");
 
+        assertNotEquals(expected, shouldBeNull);
         assertEquals(expected, actual);
     }
 }
