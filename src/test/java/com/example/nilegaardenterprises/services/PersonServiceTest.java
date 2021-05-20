@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,8 +18,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Tomas Dahlander <br>
@@ -162,6 +162,12 @@ class PersonServiceTest {
 
         assertEquals(expected, actual);
 
+        when(mockRepository.findAll()).thenReturn(new ArrayList<>());
+        String actualEmpty = personService.deleteAllPersons();
+        String expectedEmpty = "No persons found in database";
+
+        assertEquals(expectedEmpty, actualEmpty);
+        verify(mockRepository).deleteAll();
     }
 
     @Test
