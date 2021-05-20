@@ -3,12 +3,15 @@ package com.example.nilegaardenterprises.services;
 import com.example.nilegaardenterprises.models.Person;
 import com.example.nilegaardenterprises.repositories.PersonRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.jni.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Tomas Dahlander <br>
@@ -96,5 +99,19 @@ public class PersonService {
             }
         }
         return null;
+    }
+
+    public List<Person> findByBirthdateAboveYear(int birthYear) {
+        List<Person> list = personRepository.findAll();
+        return list.stream()
+                .filter(person -> LocalDate.parse(person.getBirthdate()).getYear() > birthYear)
+                .collect(Collectors.toList());
+    }
+
+    public List<Person> findByBirthdateBelowYear(int birthYear) {
+        List<Person> list = personRepository.findAll();
+        return list.stream()
+                .filter(person -> LocalDate.parse(person.getBirthdate()).getYear() < birthYear)
+                .collect(Collectors.toList());
     }
 }
