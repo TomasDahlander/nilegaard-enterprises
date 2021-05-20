@@ -21,4 +21,5 @@ public interface PersonRepository extends MongoRepository<Person, String> {
     Person findByFirstNameAndLastName(String firstName, String lastName);
     List<Person> findAllByFirstName(String firstName);
     List<Person> findAllByLastName(String lastName);
+    Person deleteByFirstNameAndLastName(String firstName, String lastName);
 }

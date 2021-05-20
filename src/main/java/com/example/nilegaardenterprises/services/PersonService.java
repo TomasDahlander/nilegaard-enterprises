@@ -76,4 +76,25 @@ public class PersonService {
         }
         return message;
     }
+
+    public String deleteOnePerson(String firstName, String lastName) {
+        Person person = findOnePerson(firstName, lastName);
+        if (person != null) {
+            personRepository.deleteByFirstNameAndLastName(person.getFirstName(), person.getLastName());
+            return "Person was deleted";
+        }
+        return "Person does not exist";
+    }
+
+    public Person findOnePerson(String firstName, String lastName) {
+        List<Person> list = personRepository.findAll();
+        if (!list.isEmpty()) {
+            for (Person person : list) {
+                if (person.getFirstName().equals(firstName) && person.getLastName().equals(lastName)) {
+                    return person;
+                }
+            }
+        }
+        return null;
+    }
 }

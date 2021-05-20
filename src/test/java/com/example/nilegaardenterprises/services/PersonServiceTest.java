@@ -163,4 +163,25 @@ class PersonServiceTest {
         assertEquals(expected, actual);
 
     }
+
+    @Test
+    void deleteOnePersonTest() {
+        when(mockRepository.findAll()).thenReturn(list);
+        String expected = "Person was deleted";
+
+        String actual = personService.deleteOnePerson("Orvar", "Karlsson");
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void findOnePersonTest() {
+        when(mockRepository.findAll()).thenReturn(list);
+
+        Person expected = list.get(0);
+
+        Person actual = personService.findOnePerson("Orvar", "Karlsson");
+
+        assertEquals(expected, actual);
+    }
 }
