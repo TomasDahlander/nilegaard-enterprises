@@ -78,6 +78,6 @@ public class PersonController {
 
     @GetMapping("/findByBirthdate/below/{birthYear}")
     public List<Person> findPersonByBirthdateBelow(@PathVariable int birthYear) {
-        return personService.findByBirthdateAboveYear(birthYear);
+        return personService.findByBirthdateBelowYear(birthYear);
     }
 }
