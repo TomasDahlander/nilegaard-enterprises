@@ -1,0 +1,23 @@
+name: Tests CI
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout our Code
+        uses: actions/checkout@v2
+
+      - name: Get and setup Java JDK 11 with adopt
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Run Tests
+        run: mvn test
