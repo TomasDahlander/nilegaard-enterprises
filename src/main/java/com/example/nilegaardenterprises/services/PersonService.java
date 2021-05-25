@@ -3,12 +3,15 @@ package com.example.nilegaardenterprises.services;
 import com.example.nilegaardenterprises.models.Person;
 import com.example.nilegaardenterprises.repositories.PersonRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.jni.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Tomas Dahlander <br>
@@ -63,4 +66,52 @@ public class PersonService {
         return personRepository.findAllByLastName(lastName);
     }
 
+    public String deleteAllPersons() {
+        List<Person> list = personRepository.findAll();
+        String message = "All persons below removed from database:\n";
+        if (list.size() == 0) {
+            message = "No persons found in database";
+        } else  {
+            for (Person person : list) {
+                message += person.getFirstName() + " " + person.getLastName() + " deleted.\n";
+            }
+            personRepository.deleteAll();
+        }
+        return message;
+    }
+
+    public String deleteOnePerson(String firstName, String lastName) {
+        Person person = findOnePerson(firstName, lastName);
+        if (person != null) {
+            personRepository.deleteByFirstNameAndLastName(person.getFirstName(), person.getLastName());
+            return "Person was deleted";
+        }
+        return "Person does not exist";
+    }
+
+    public Person findOnePerson(String firstName, String lastName) {
+        List<Person> list = personRepository.findAll();
+        if (!list.isEmpty()) {
+            for (Person person : list) {
+                if (person.getFirstName().equals(firstName) && person.getLastName().equals(lastName)) {
+                    return person;
+                }
+            }
+        }
+        return null;
+    }
+
+    public List<Person> findByBirthdateAboveYear(int birthYear) {
+        List<Person> list = personRepository.findAll();
+        return list.stream()
+                .filter(person -> LocalDate.parse(person.getBirthdate()).getYear() > birthYear)
+                .collect(Collectors.toList());
+    }
+
+    public List<Person> findByBirthdateBelowYear(int birthYear) {
+        List<Person> list = personRepository.findAll();
+        return list.stream()
+                .filter(person -> LocalDate.parse(person.getBirthdate()).getYear() < birthYear)
+                .collect(Collectors.toList());
+    }
 }
