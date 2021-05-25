@@ -16,13 +16,13 @@ public class GreetingController {
     @GetMapping("/")
     public String welcomeMessage(){
         return "Welcome to Nilecity person book!<br>" +
-                "/all = Get all persons<br>" +
-                "/findByPhone/{phone number} = Get the person with that phone number<br>" +
-                "/findByFirstNameAndLastName/{firstName}/{lastName} = Get that specific person<br>" +
-                "/findByFirstName/{firstName} = Get all persons with that firstname<br>" +
-                "/findByLastName/{lastName} = Get all persons with that lastname<br>" +
-                "/deleteOnePerson/{firstName}/{lastName} = Delete that specific person from the book<br>" +
-                "/findByBirthdate/above/{birthYear} = Get the persons whose birth-year is higher than input<br>" +
-                "/findByBirthdate/below/{birthYear} = Get the persons whose birth-year is lower than input<br>";
+                "person/all = Get all persons<br>" +
+                "person/findByPhone/{phone number} = Get the person with that phone number<br>" +
+                "person/findByFirstNameAndLastName/{firstName}/{lastName} = Get that specific person<br>" +
+                "person/findByFirstName/{firstName} = Get all persons with that firstname<br>" +
+                "person/findByLastName/{lastName} = Get all persons with that lastname<br>" +
+                "person/deleteOnePerson/{firstName}/{lastName} = Delete that specific person from the book<br>" +
+                "person/findByBirthdate/above/{birthYear} = Get the persons whose birth-year is higher than input<br>" +
+                "person/findByBirthdate/below/{birthYear} = Get the persons whose birth-year is lower than input<br>";
     }
 }
