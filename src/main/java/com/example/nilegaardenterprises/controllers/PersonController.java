@@ -20,12 +20,6 @@ public class PersonController {
 
     private final PersonService personService;
 
-    @GetMapping("/")
-    public String welcomeMessage(@RequestParam(required = false) String name ){
-        if(name == null) name = "Orvar Karlsson";
-        return "Hi and welcome to this controller " + name;
-    }
-
     @GetMapping("/all")
     public List<Person> getAllPersons() {
         return personService.getAllPersons();
@@ -78,6 +72,6 @@ public class PersonController {
 
     @GetMapping("/findByBirthdate/below/{birthYear}")
     public List<Person> findPersonByBirthdateBelow(@PathVariable int birthYear) {
-        return personService.findByBirthdateAboveYear(birthYear);
+        return personService.findByBirthdateBelowYear(birthYear);
     }
 }
