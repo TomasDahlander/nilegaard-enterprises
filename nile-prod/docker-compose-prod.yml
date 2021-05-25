@@ -16,7 +16,7 @@ services:
       - mongo
 
   java-app:
-    image: person-image
+    image: dalle90/nilecity-appen:latest
     ports:
       - 8083:8080
     environment:
